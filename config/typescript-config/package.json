@@ -1,0 +1,13 @@
+{
+  "name": "@repo/ts-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "files": [
+    "library.json",
+    "node.json"
+  ],
+  "devDependencies": {
+    "@total-typescript/ts-reset": "^0.6.1"
+  }
+}

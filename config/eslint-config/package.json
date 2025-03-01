@@ -1,0 +1,26 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "files": [
+    "library.js",
+    "next.js",
+    "node.js"
+  ],
+  "devDependencies": {
+    "@repo/prettier": "workspace:*",
+    "@rocketseat/eslint-config": "^2.2.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-next": "^15.0.3",
+    "eslint-plugin-simple-import-sort": "^12.1.1"
+  },
+  "prettier": "@repo/prettier",
+  "eslintConfig": {
+    "extends": [
+      "./library.js"
+    ]
+  },
+  "dependencies": {
+    "eslint": "^8.56.0"
+  }
+}
