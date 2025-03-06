@@ -56,7 +56,7 @@ model Account {
   providerAccountId String          @unique @map("provider_account_id")
   userId            String          @map("user_id")
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, userId])
   @@map("accounts")
@@ -73,11 +73,11 @@ model Invite {
   email          String
   role           Role     @default(MEMBER)
   createdAt      DateTime @default(now()) @map("created_at")
-  userId         String?  @map("user_id")
+  authorId       String?  @map("author_id")
   organizationId String   @map("organization_id")
 
-  author       User?        @relation(fields: [userId], references: [id])
-  organization Organization @relation(fields: [organizationId], references: [id])
+  author       User?        @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@unique([email, organizationId])
   @@index([email])
@@ -110,8 +110,8 @@ model Member {
   organizationId String @map("organization_id")
   userId         String @map("user_id")
 
-  organization Organization @relation(fields: [organizationId], references: [id])
-  user         User         @relation(fields: [userId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([organizationId, userId])
   @@map("members")
@@ -120,7 +120,7 @@ model Member {
 model Project {
   id             String   @id @default(uuid())
   name           String
-  description    String
+  description    String?
   slug           String   @unique
   ownerId        String
   avatarUrl      String?  @map("avatar_url")
@@ -129,7 +129,7 @@ model Project {
   organizationId String   @map("organization_id")
 
   onwer        User         @relation(fields: [ownerId], references: [id])
-  organization Organization @relation(fields: [organizationId], references: [id])
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@map("projects")
 }
